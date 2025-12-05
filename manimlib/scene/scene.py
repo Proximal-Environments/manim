@@ -395,6 +395,19 @@ class Scene(object):
         self.mobjects = []
         return self
 
+    @affects_mobject_list
+    def clear_all_except(self, *mobjects_to_keep: Mobject):
+        """
+        Clears all mobjects from the scene and adds back only the ones
+        specified in mobjects_to_keep.
+        
+        Args:
+            *mobjects_to_keep: Mobjects that should remain in the scene
+        """
+        self.mobjects = []
+        self.add(*mobjects_to_keep)
+        return self
+
     def get_mobjects(self) -> list[Mobject]:
         return list(self.mobjects)
 
