@@ -12,6 +12,10 @@ def test_scene_clear_all_except():
     
     scene = Scene()
     
+    # Note: Scene has camera.frame in mobjects by default
+    initial_mobjects = len(scene.mobjects)
+    print(f"Scene starts with {initial_mobjects} mobject(s) (camera frame)")
+    
     # Test 1: Clear all except specific objects
     print("\nTest 1: Keep specific objects")
     circle = Circle()
@@ -21,7 +25,7 @@ def test_scene_clear_all_except():
     scene.add(circle, square, triangle)
     initial_count = len(scene.mobjects)
     print(f"  Added 3 objects, mobjects count: {initial_count}")
-    assert initial_count == 3, f"Expected 3 mobjects, got {initial_count}"
+    assert initial_count == initial_mobjects + 3, f"Expected {initial_mobjects + 3} mobjects, got {initial_count}"
     
     scene.clear_all_except(circle, triangle)
     after_clear = len(scene.mobjects)
