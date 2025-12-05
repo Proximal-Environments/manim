@@ -118,7 +118,7 @@ class DataVisualizationScene(Scene):
         print("Visualization 2: Exponential data")
         
         # Switch to dataset 3 - keep axes
-        self.clear_all_except(axes, axes_labels)
+        self.clear_all_except(axes, x_label, y_label)
         
         # Dataset 3
         points3 = VGroup(*[
