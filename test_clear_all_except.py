@@ -3,7 +3,7 @@
 
 from manimlib import Scene, InteractiveScene
 from manimlib.mobject.geometry import Circle, Square, Triangle
-from manimlib.constants import RED, BLUE, GREEN, YELLOW, PURPLE
+from manimlib.constants import RED, BLUE, GREEN, YELLOW, PURPLE, LEFT, RIGHT
 
 
 class TestClearAllExceptScene(Scene):
