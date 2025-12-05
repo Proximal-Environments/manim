@@ -91,7 +91,7 @@ class DataVisualizationScene(Scene):
         x_label = Text("X", font_size=24).next_to(axes, DOWN)
         y_label = Text("Y", font_size=24).next_to(axes, LEFT)
         
-        self.add(axes, axes_labels)
+        self.add(axes, x_label, y_label)
         print("Setup: Created axes")
         
         # Dataset 1
@@ -105,7 +105,7 @@ class DataVisualizationScene(Scene):
         print("Visualization 1: Linear data")
         
         # Switch to dataset 2 - keep axes
-        self.clear_all_except(axes, axes_labels)
+        self.clear_all_except(axes, x_label, y_label)
         
         # Dataset 2
         points2 = VGroup(*[
