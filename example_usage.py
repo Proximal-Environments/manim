@@ -73,7 +73,7 @@ class ExampleClearAllExcept(Scene):
         ]
         
         self.play(FadeIn(subtitle4))
-        self.play(*[Create(m) for m in mixed])
+        self.play(*[ShowCreation(m) for m in mixed])
         self.wait(1)
         
         # Final clear
