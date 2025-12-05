@@ -111,6 +111,8 @@ class TestClearAllExceptInteractiveScene(unittest.TestCase):
     def setUp(self):
         """Create an interactive scene for each test"""
         self.scene = InteractiveScene()
+        # Call setup to initialize all the interactive scene attributes
+        self.scene.setup()
         
     def test_clear_all_except_preserves_selection_highlight(self):
         """Test that selection_highlight is preserved in InteractiveScene"""
