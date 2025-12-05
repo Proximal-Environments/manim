@@ -65,9 +65,9 @@ class TestClearAllExceptInteractiveScene(InteractiveScene):
     def construct(self):
         # Create multiple mobjects
         circle = Circle(color=RED)
-        square = Square(color=BLUE).shift(2 * [1, 0, 0])
-        triangle = Triangle(color=GREEN).shift(2 * [-1, 0, 0])
-        text = Text("Interactive!", color=YELLOW).shift(2 * [0, -1, 0])
+        square = Square(color=BLUE).shift([2, 0, 0])
+        triangle = Triangle(color=GREEN).shift([-2, 0, 0])
+        text = Text("Interactive!", color=YELLOW).shift([0, -2, 0])
         
         # Add all mobjects to the scene
         self.add(circle, square, triangle, text)
