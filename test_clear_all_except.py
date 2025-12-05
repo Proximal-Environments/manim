@@ -55,12 +55,13 @@ def test_scene_clear_all_except():
     # Clear all except the new square
     scene.clear_all_except(new_square)
     
-    # Verify only new square remains (plus the frame)
+    # Verify only new square remains (plus the frame which is auto-preserved)
     print(f"Number of mobjects after second clear_all_except: {len(scene.mobjects)}")
     assert len(scene.mobjects) == 2, f"Expected 2 mobjects (1 + frame), got {len(scene.mobjects)}"
     assert new_square in scene.mobjects, "New square should be in scene"
     assert circle not in scene.mobjects, "Circle should not be in scene"
     assert square not in scene.mobjects, "Square should not be in scene"
+    assert scene.frame in scene.mobjects, "Frame should still be in scene (auto-preserved)"
     
     print("✓ All Scene tests passed!")
     return True
