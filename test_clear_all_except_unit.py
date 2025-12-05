@@ -36,7 +36,7 @@ def test_scene_clear_all_except():
     assert square not in scene.mobjects, "Square should be removed"
     print("  ✓ Test 1 passed")
     
-    # Test 2: Clear all (no arguments)
+    # Test 2: Clear all (no arguments) - removes everything including camera frame
     print("\nTest 2: Clear all with no arguments")
     scene.clear_all_except()
     after_clear_all = len(scene.mobjects)
