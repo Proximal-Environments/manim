@@ -1,0 +1,148 @@
+FILES OVERVIEW - clear_all_except() Implementation
+===================================================
+
+MODIFIED SOURCE FILES
+---------------------
+1. manimlib/scene/scene.py
+   - Lines 398-423: Added clear_all_except() method
+   - Decorated with @affects_mobject_list
+   - Automatically preserves camera frame
+   - Returns self for method chaining
+
+2. manimlib/scene/interactive_scene.py
+   - Lines 248-261: Added clear_all_except() override
+   - Calls parent implementation
+   - Regenerates selection_search_set
+   - Returns self for method chaining
+
+TEST FILES
+----------
+1. test_clear_all_except_simple.py
+   - Comprehensive test suite for both Scene and InteractiveScene
+   - Tests basic functionality, camera frame preservation, method chaining
+   - Tests selection_search_set updates in InteractiveScene
+   - All tests passing ✅
+
+2. final_verification.py
+   - Complete verification of all features
+   - Tests edge cases and practical scenarios
+   - Verifies Scene and InteractiveScene behavior
+   - All tests passing ✅
+
+3. debug_test.py
+   - Simple debugging script for development
+   - Used to verify camera frame preservation
+
+EXAMPLE FILES
+-------------
+1. example_usage.py
+   - Practical usage examples
+   - ExampleClearAllExcept: Multi-slide presentation demo
+   - ExampleSelectiveUpdate: Coordinate system with changing points
+   - Can run with or without display (--show flag)
+
+2. demo_clear_all_except.py
+   - Visual demonstrations for both Scene and InteractiveScene
+   - Shows slideshow functionality
+   - Demonstrates interactive scene integration
+
+DOCUMENTATION FILES
+-------------------
+1. README_CLEAR_ALL_EXCEPT.md
+   - Main documentation file
+   - Quick start guide
+   - Implementation summary
+   - Test results
+
+2. QUICK_REFERENCE.md
+   - Quick syntax reference
+   - Common usage patterns
+   - Comparison with clear()
+   - Tips and best practices
+
+3. CLEAR_ALL_EXCEPT_DOCUMENTATION.md
+   - Complete API documentation
+   - Detailed usage examples
+   - Implementation details
+   - Related methods
+
+4. SUMMARY.md
+   - Implementation overview
+   - Design decisions
+   - Test results
+   - Files modified
+
+5. FILES_OVERVIEW.txt
+   - This file
+   - List of all files created/modified
+
+TEST RESULTS
+------------
+All tests passing with xvfb-run:
+
+Scene Tests:
+✓ Initially added 4 mobjects to scene (total: 5 including camera frame)
+✓ After clear_all_except, kept 2 mobjects (total: 3 including camera frame)
+✓ Verified that only circle and text remain
+✓ After clear_all_except() with no arguments, scene is empty
+✓ Method returns self for chaining
+
+InteractiveScene Tests:
+✓ Initially added 4 mobjects to interactive scene
+✓ After clear_all_except, kept 2 mobjects
+✓ Selection search set properly updated
+✓ After clear_all_except() with no arguments, all mobjects cleared
+✓ Method returns self for chaining
+
+Edge Cases:
+✓ Handle objects not in scene
+✓ Handle duplicate objects in keep list
+✓ Camera frame explicitly included (safe)
+
+Practical Scenarios:
+✓ Slideshow with persistent title
+✓ Coordinate system with changing points
+
+RUNNING TESTS
+-------------
+# Main test suite
+xvfb-run -a python test_clear_all_except_simple.py
+
+# Comprehensive verification
+xvfb-run -a python final_verification.py
+
+# Usage examples
+xvfb-run -a python example_usage.py
+
+# Visual demos
+xvfb-run -a python demo_clear_all_except.py
+
+KEY FEATURES
+------------
+✅ Automatic camera frame preservation
+✅ Flexible arguments (0, 1, or multiple objects)
+✅ Method chaining support
+✅ InteractiveScene integration
+✅ Selection search set updates
+✅ Edge case handling
+✅ Comprehensive documentation
+✅ All tests passing
+
+USAGE EXAMPLES
+--------------
+# Basic usage
+scene.clear_all_except(obj1, obj2)
+
+# Clear all
+scene.clear_all_except()
+
+# Method chaining
+scene.clear_all_except(title).add(content).wait(1)
+
+# Slideshow
+for slide in slides:
+    scene.clear_all_except(title)
+    scene.add(slide)
+    scene.wait()
+
+STATUS: ✅ COMPLETE AND TESTED
