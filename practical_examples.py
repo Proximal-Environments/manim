@@ -88,7 +88,8 @@ class DataVisualizationScene(Scene):
             width=8,
             height=6
         )
-        axes_labels = axes.get_axis_labels(x_label="X", y_label="Y")
+        x_label = Text("X", font_size=24).next_to(axes, DOWN)
+        y_label = Text("Y", font_size=24).next_to(axes, LEFT)
         
         self.add(axes, axes_labels)
         print("Setup: Created axes")
