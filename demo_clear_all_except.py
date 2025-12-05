@@ -18,12 +18,12 @@ class DemoClearAllExceptBasic(Scene):
             Circle(color=RED).shift(LEFT * 3),
             Square(color=BLUE).shift(LEFT * 1),
             Triangle(color=GREEN).shift(RIGHT * 1),
-            Star(color=YELLOW).shift(RIGHT * 3)
+            Dot(color=YELLOW, radius=0.5).shift(RIGHT * 3)
         )
         
         labels = VGroup(*[
             Text(name, font_size=20).next_to(obj, DOWN)
-            for obj, name in zip(objects, ["Circle", "Square", "Triangle", "Star"])
+            for obj, name in zip(objects, ["Circle", "Square", "Triangle", "Dot"])
         ])
         
         # Show all objects
