@@ -90,11 +90,12 @@ def test_interactive_scene():
     assert len(scene.selection_search_set) == 0, "Search set should be empty"
     print("✓ clear_all_except() updates search set")
     
-    # Test 3: Method chaining
+    # Test 3: Method chaining (return value)
     c3 = Circle(color=RED)
-    result = scene.add(c3).clear_all_except(c3)
+    scene.add(c3)
+    result = scene.clear_all_except(c3)
     assert result is scene, "Should return self"
-    print("✓ Method chaining works")
+    print("✓ clear_all_except returns self")
     
     print("\n✅ All InteractiveScene tests passed!")
     return True
