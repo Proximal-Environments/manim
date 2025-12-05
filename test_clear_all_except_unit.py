@@ -12,6 +12,8 @@ class TestClearAllExceptScene(unittest.TestCase):
     def setUp(self):
         """Create a scene for each test"""
         self.scene = Scene()
+        # Scene automatically adds camera.frame to mobjects
+        self.initial_mobjects_count = len(self.scene.mobjects)
         
     def test_clear_all_except_single_object(self):
         """Test clearing all except a single object"""
@@ -20,7 +22,7 @@ class TestClearAllExceptScene(unittest.TestCase):
         triangle = Triangle(color=GREEN)
         
         self.scene.add(square, circle, triangle)
-        self.assertEqual(len(self.scene.mobjects), 3)
+        self.assertEqual(len(self.scene.mobjects), self.initial_mobjects_count + 3)
         
         self.scene.clear_all_except(circle)
         
