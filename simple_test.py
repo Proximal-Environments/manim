@@ -28,6 +28,7 @@ print("✅ Scene test passed!")
 # Test InteractiveScene
 print("\nTesting InteractiveScene.clear_all_except()...")
 iscene = InteractiveScene(skip_animations=True)
+iscene.setup()  # InteractiveScene needs setup to initialize unselectables
 
 c1 = Circle(color=RED)
 c2 = Square(color=BLUE)
