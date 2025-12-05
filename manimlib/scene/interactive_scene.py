@@ -245,6 +245,33 @@ class InteractiveScene(Scene):
         super().remove(*mobjects)
         self.regenerate_selection_search_set()
 
+    def clear_all_except(self, *mobjects_to_keep: Mobject):
+        """
+        Clears all objects from screen and adds back the ones given in the argument list.
+        This override ensures that the selection highlight is properly maintained.
+        
+        Args:
+            *mobjects_to_keep: Mobjects that should remain on screen after clearing
+        """
+        # Store the mobjects to keep
+        to_keep = list(mobjects_to_keep)
+        
+        # Preserve the selection highlight if it exists
+        has_highlight = self.selection_highlight in self.mobjects
+        
+        # Clear everything using parent method
+        super().clear_all_except(*to_keep)
+        
+        # Re-add selection highlight if it was there before
+        if has_highlight and self.selection_highlight not in self.mobjects:
+            self.mobjects.insert(0, self.selection_highlight)
+            self.assemble_render_groups()
+        
+        # Regenerate selection search set
+        self.regenerate_selection_search_set()
+        
+        return self
+
     # Related to selection
 
     def toggle_selection_mode(self):
