@@ -58,7 +58,7 @@ class ExampleClearAllExcept(Scene):
         ]
         
         self.play(FadeIn(subtitle3))
-        self.play(*[Create(t) for t in triangles])
+        self.play(*[ShowCreation(t) for t in triangles])
         self.wait(1)
         
         # Final slide: Mixed shapes, but keep title
