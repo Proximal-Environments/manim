@@ -28,10 +28,14 @@ class VisualTestClearAllExcept(Scene):
         triangle = Triangle(color=GREEN).scale(0.7).shift([3, 1, 0])
         rect = Rectangle(color=ORANGE, width=2, height=0.8).shift([-3, -1, 0])
         
-        label1 = Text("Keep", font_size=24, color=WHITE).next_to(circle, [0, -1, 0])
-        label2 = Text("Remove", font_size=24, color=WHITE).next_to(square, [0, -1, 0])
-        label3 = Text("Remove", font_size=24, color=WHITE).next_to(triangle, [0, -1, 0])
-        label4 = Text("Keep", font_size=24, color=WHITE).next_to(rect, [0, -1, 0])
+        label1 = Text("Keep", font_size=24, color=WHITE)
+        label1.next_to(circle, np.array([0, -1, 0]))
+        label2 = Text("Remove", font_size=24, color=WHITE)
+        label2.next_to(square, np.array([0, -1, 0]))
+        label3 = Text("Remove", font_size=24, color=WHITE)
+        label3.next_to(triangle, np.array([0, -1, 0]))
+        label4 = Text("Keep", font_size=24, color=WHITE)
+        label4.next_to(rect, np.array([0, -1, 0]))
         
         # Add all
         self.add(circle, square, triangle, rect)
