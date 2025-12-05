@@ -69,7 +69,7 @@ class ExampleClearAllExcept(Scene):
             Circle(radius=0.5, color=RED).shift(2*LEFT + UP),
             Square(side_length=1, color=GREEN).shift(2*RIGHT + UP),
             Triangle(color=BLUE).shift(2*LEFT + DOWN),
-            Star(color=YELLOW).shift(2*RIGHT + DOWN),
+            Rectangle(color=YELLOW, width=1.5, height=1).shift(2*RIGHT + DOWN),
         ]
         
         self.play(FadeIn(subtitle4))
