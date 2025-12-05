@@ -123,7 +123,7 @@ class DemoClearAllExceptGroups(Scene):
         
         group2 = VGroup(
             Triangle(color=BLUE).shift(RIGHT * 1),
-            Star(color=BLUE).shift(RIGHT * 2)
+            Dot(color=BLUE, radius=0.4).shift(RIGHT * 2)
         )
         
         label1 = Text("Group 1", font_size=24, color=RED).next_to(group1, DOWN, buff=0.5)
