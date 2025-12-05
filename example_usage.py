@@ -32,7 +32,7 @@ class ExampleClearAllExcept(Scene):
         ]
         
         self.play(FadeIn(subtitle1))
-        self.play(*[Create(c) for c in circles])
+        self.play(*[ShowCreation(c) for c in circles])
         self.wait(1)
         
         # Clear all except title, show squares
