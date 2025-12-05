@@ -399,13 +399,21 @@ class Scene(object):
     def clear_all_except(self, *mobjects_to_keep: Mobject):
         """
         Clears all mobjects from the scene and adds back only the specified ones.
+        Duplicate mobjects in the argument list are handled gracefully (only added once).
         
         Args:
             *mobjects_to_keep: Mobjects that should remain in the scene after clearing
         """
         self.mobjects = []
         if mobjects_to_keep:
-            self.add(*mobjects_to_keep)
+            # Remove duplicates while preserving order
+            seen = set()
+            unique_mobjects = []
+            for mob in mobjects_to_keep:
+                if id(mob) not in seen:
+                    seen.add(id(mob))
+                    unique_mobjects.append(mob)
+            self.add(*unique_mobjects)
         return self
 
     def get_mobjects(self) -> list[Mobject]:
