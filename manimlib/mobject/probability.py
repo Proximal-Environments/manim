@@ -12,7 +12,6 @@ from manimlib.mobject.svg.brace import Brace
 from manimlib.mobject.svg.tex_mobject import Tex
 from manimlib.mobject.svg.tex_mobject import TexText
 from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.color import color_gradient
 from manimlib.utils.iterables import listify
 
 from typing import TYPE_CHECKING
@@ -78,11 +77,12 @@ class SampleSpace(Rectangle):
         vect: np.ndarray
     ) -> VGroup:
         p_list = self.complete_p_list(p_list)
-        colors = color_gradient(colors, len(p_list))
+        colors = listify(colors)
+        color = colors[0] if len(colors) > 0 else GREY_D
 
         last_point = self.get_edge_center(-vect)
         parts = VGroup()
-        for factor, color in zip(p_list, colors):
+        for factor in p_list:
             part = SampleSpace()
             part.set_fill(color, 1)
             part.replace(self, stretch=True)

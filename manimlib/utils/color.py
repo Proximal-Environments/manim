@@ -76,31 +76,6 @@ def int_to_hex(rgb_int: int) -> str:
     return f"#{rgb_int:06x}".upper()
 
 
-def color_gradient(
-    reference_colors: Iterable[ManimColor],
-    length_of_output: int,
-    interp_by_hsl: bool = False,
-) -> list[Color]:
-    if length_of_output == 0:
-        return []
-    n_ref_colors = len(reference_colors)
-    alphas = np.linspace(0, (n_ref_colors - 1), length_of_output)
-    floors = alphas.astype('int')
-    alphas_mod1 = alphas % 1
-    # End edge case
-    alphas_mod1[-1] = 1
-    floors[-1] = n_ref_colors - 2
-    return [
-        interpolate_color(
-            reference_colors[i],
-            reference_colors[i + 1],
-            alpha,
-            interp_by_hsl=interp_by_hsl,
-        )
-        for i, alpha in zip(floors, alphas_mod1)
-    ]
-
-
 def interpolate_color(
     color1: ManimColor,
     color2: ManimColor,

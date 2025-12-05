@@ -23,7 +23,6 @@ from manimlib.mobject.svg.tex_mobject import Tex
 from manimlib.mobject.svg.text_mobject import Text
 from manimlib.mobject.types.dot_cloud import DotCloud
 from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.mobject.types.vectorized_mobject import VHighlight
 from manimlib.mobject.types.vectorized_mobject import VMobject
 from manimlib.scene.scene import Scene
 from manimlib.scene.scene import SceneState
@@ -304,17 +303,15 @@ class InteractiveScene(Scene):
 
     def get_highlight(self, mobject: Mobject) -> Mobject:
         if isinstance(mobject, VMobject) and mobject.has_points() and not self.select_top_level_mobs:
-            length = max([mobject.get_height(), mobject.get_width()])
-            result = VHighlight(
-                mobject,
-                max_stroke_addition=min([50 * length, 10]),
-            )
-            result.add_updater(lambda m: m.replace(mobject, stretch=True))
-            return result
-        elif isinstance(mobject, DotCloud):
+            highlight = mobject.copy()
+            for sm in highlight.family_members_with_points():
+                sm.set_fill(opacity=0)
+                sm.set_stroke(width=3.0, opacity=1.0)
+            highlight.add_updater(lambda h: h.match_points(mobject))
+            return highlight
+        if isinstance(mobject, DotCloud):
             return Mobject()
-        else:
-            return self.get_corner_dots(mobject)
+        return self.get_corner_dots(mobject)
 
     def add_to_selection(self, *mobjects: Mobject):
         mobs = list(filter(

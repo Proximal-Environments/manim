@@ -3,7 +3,6 @@ from __future__ import annotations
 import numpy as np
 
 from manimlib.mobject.mobject import Mobject
-from manimlib.utils.color import color_gradient
 from manimlib.utils.color import color_to_rgba
 from manimlib.utils.iterables import resize_with_interpolation
 
@@ -49,14 +48,6 @@ class PMobject(Mobject):
     def add_point(self, point: Vect3, rgba=None, color=None, opacity=None) -> Self:
         rgbas = None if rgba is None else [rgba]
         self.add_points([point], rgbas, color, opacity)
-        return self
-
-    @Mobject.affects_data
-    def set_color_by_gradient(self, *colors: ManimColor) -> Self:
-        self.data["rgba"][:] = np.array(list(map(
-            color_to_rgba,
-            color_gradient(colors, self.get_num_points())
-        )))
         return self
 
     @Mobject.affects_data

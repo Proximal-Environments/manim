@@ -24,7 +24,6 @@ from manimlib.event_handler.event_listner import EventListener
 from manimlib.event_handler.event_type import EventType
 from manimlib.logger import log
 from manimlib.shader_wrapper import ShaderWrapper
-from manimlib.utils.color import color_gradient
 from manimlib.utils.color import color_to_rgb
 from manimlib.utils.color import get_colormap_list
 from manimlib.utils.color import rgb_to_hex
@@ -1408,27 +1407,6 @@ class Mobject(object):
 
     def get_opacities(self) -> float:
         return self.data["rgba"][:, 3]
-
-    def set_color_by_gradient(self, *colors: ManimColor) -> Self:
-        if self.has_points():
-            self.set_color(colors)
-        else:
-            self.set_submobject_colors_by_gradient(*colors)
-        return self
-
-    def set_submobject_colors_by_gradient(self, *colors: ManimColor) -> Self:
-        if len(colors) == 0:
-            raise Exception("Need at least one color")
-        elif len(colors) == 1:
-            return self.set_color(*colors)
-
-        # mobs = self.family_members_with_points()
-        mobs = self.submobjects
-        new_colors = color_gradient(colors, len(mobs))
-
-        for mob, color in zip(mobs, new_colors):
-            mob.set_color(color)
-        return self
 
     def fade(self, darkness: float = 0.5, recurse: bool = True) -> Self:
         self.set_opacity(1.0 - darkness, recurse=recurse)
