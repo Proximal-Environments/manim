@@ -248,12 +248,24 @@ class InteractiveScene(Scene):
     def clear_all_except(self, *mobjects_to_keep: Mobject):
         """
         Clears all objects from the scene and adds back only the ones
-        specified in the argument list.
+        specified in the argument list. Internal InteractiveScene objects
+        (like selection_highlight, selection_rectangle, crosshair, etc.)
+        are automatically preserved.
         
         Args:
             *mobjects_to_keep: Mobjects to keep on screen after clearing
         """
+        # Save internal objects that should be preserved
+        internal_objects = [m for m in self.mobjects if m in self.unselectables]
+        
+        # Call parent's clear_all_except (which handles frame preservation)
         super().clear_all_except(*mobjects_to_keep)
+        
+        # Re-add internal objects that were present before
+        for obj in internal_objects:
+            if obj not in self.mobjects:
+                self.mobjects.append(obj)
+        
         self.regenerate_selection_search_set()
         return self
 
