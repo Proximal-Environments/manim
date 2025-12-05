@@ -7,7 +7,8 @@ This demonstrates a multi-slide presentation style animation
 from manimlib import Scene
 from manimlib.mobject.geometry import Circle, Square, Triangle, Rectangle
 from manimlib.mobject.svg.text_mobject import Text
-from manimlib.animation.creation import ShowCreation, FadeIn, FadeOut
+from manimlib.animation.creation import ShowCreation
+from manimlib.animation.fading import FadeIn, FadeOut
 from manimlib.constants import UP, DOWN, LEFT, RIGHT, ORIGIN
 from manimlib.constants import RED, BLUE, GREEN, YELLOW, PURPLE, ORANGE, WHITE
 
