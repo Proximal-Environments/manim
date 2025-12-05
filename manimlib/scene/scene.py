@@ -404,7 +404,8 @@ class Scene(object):
         Parameters:
         -----------
         *mobjects_to_keep : Mobject
-            Variable number of mobjects to keep on screen after clearing
+            Variable number of mobjects to keep on screen after clearing.
+            Duplicate references are automatically deduplicated.
         
         Returns:
         --------
@@ -412,7 +413,14 @@ class Scene(object):
             Returns the scene instance for method chaining
         """
         self.clear()
-        self.add(*mobjects_to_keep)
+        # Deduplicate mobjects_to_keep while preserving order
+        seen = set()
+        unique_mobjects = []
+        for mob in mobjects_to_keep:
+            if id(mob) not in seen:
+                seen.add(id(mob))
+                unique_mobjects.append(mob)
+        self.add(*unique_mobjects)
         return self
 
     def get_mobjects(self) -> list[Mobject]:
