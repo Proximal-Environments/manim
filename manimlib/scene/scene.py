@@ -399,15 +399,27 @@ class Scene(object):
     def clear_all_except(self, *mobjects_to_keep: Mobject):
         """
         Clears all objects from the scene and adds back only the ones
-        specified in the argument list.
+        specified in the argument list. The camera frame is automatically
+        preserved.
         
         Parameters
         ----------
         mobjects_to_keep : Mobject
             The mobjects that should remain in the scene after clearing
         """
-        self.clear()
-        self.add(*mobjects_to_keep)
+        # Store the camera frame to preserve it
+        camera_frame = self.camera.frame
+        
+        # Clear all mobjects
+        self.mobjects = []
+        
+        # Always add back the camera frame first
+        self.mobjects.append(camera_frame)
+        
+        # Add back the mobjects to keep
+        if mobjects_to_keep:
+            self.add(*mobjects_to_keep)
+        
         return self
 
     def get_mobjects(self) -> list[Mobject]:
