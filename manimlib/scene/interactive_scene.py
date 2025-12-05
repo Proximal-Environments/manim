@@ -338,6 +338,25 @@ class InteractiveScene(Scene):
             mob.refresh_bounding_box()
         self.selection.set_submobjects([])
 
+    def clear_all_except(self, *mobjects_to_keep: Mobject):
+        """
+        Clears all mobjects from the scene except those specified in the argument list.
+        The specified mobjects are kept on screen. This method also handles the selection
+        properly for InteractiveScene.
+        """
+        # Use parent class method but handle selection properly
+        kept_mobs = set(mobjects_to_keep)
+        # Clear selection if any selected mobject is being removed
+        for mob in list(self.selection):
+            if mob not in kept_mobs and mob not in [m for km in kept_mobs for m in km.get_family()]:
+                self.clear_selection()
+                break
+        # Call parent method
+        result = super().clear_all_except(*mobjects_to_keep)
+        # Regenerate selection search set
+        self.regenerate_selection_search_set()
+        return result
+
     def disable_interaction(self, *mobjects: Mobject):
         for mob in mobjects:
             for sm in mob.get_family():
