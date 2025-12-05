@@ -248,12 +248,22 @@ class InteractiveScene(Scene):
     def clear_all_except(self, *mobjects_to_keep: Mobject):
         """
         Clears all mobjects from the scene and adds back only the ones
-        specified in mobjects_to_keep.
+        specified in mobjects_to_keep. Also preserves the selection_highlight
+        which is part of the InteractiveScene's internal UI.
         
         Args:
             *mobjects_to_keep: Mobjects that should remain in the scene
         """
+        # Preserve selection_highlight if it's currently in the scene
+        has_selection_highlight = self.selection_highlight in self.mobjects
+        
+        # Call parent's clear_all_except
         super().clear_all_except(*mobjects_to_keep)
+        
+        # Re-add selection_highlight if it was present before
+        if has_selection_highlight and self.selection_highlight not in self.mobjects:
+            self.mobjects.insert(0, self.selection_highlight)
+        
         self.regenerate_selection_search_set()
         return self
 
