@@ -63,6 +63,16 @@ def test_scene_clear_all_except():
     assert square not in scene.mobjects, "Square should not be in scene"
     assert scene.frame in scene.mobjects, "Frame should still be in scene (auto-preserved)"
     
+    # Test that we can explicitly keep nothing (even clear the frame if we want)
+    scene.add(circle)  # Add something back
+    scene.mobjects = [m for m in scene.mobjects if m != scene.frame]  # Manually remove frame
+    print(f"Number of mobjects after manual frame removal: {len(scene.mobjects)}")
+    scene.clear_all_except(circle)  # Clear all except circle, frame should not come back
+    print(f"Number of mobjects after clear_all_except with no frame: {len(scene.mobjects)}")
+    assert len(scene.mobjects) == 1, f"Expected 1 mobject (circle only), got {len(scene.mobjects)}"
+    assert circle in scene.mobjects, "Circle should be in scene"
+    assert scene.frame not in scene.mobjects, "Frame should not be in scene (was manually removed)"
+    
     print("✓ All Scene tests passed!")
     return True
 
