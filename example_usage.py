@@ -5,7 +5,7 @@ This script demonstrates practical use cases for the new method.
 """
 
 from manimlib import Scene
-from manimlib.mobject.geometry import Circle, Square, Triangle, Star
+from manimlib.mobject.geometry import Circle, Square, Triangle, Rectangle
 from manimlib.mobject.svg.text_mobject import Text
 from manimlib.constants import *
 from manimlib.animation.creation import Create, FadeIn, FadeOut
