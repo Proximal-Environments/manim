@@ -45,7 +45,7 @@ class ExampleClearAllExcept(Scene):
         ]
         
         self.play(FadeIn(subtitle2))
-        self.play(*[Create(s) for s in squares])
+        self.play(*[ShowCreation(s) for s in squares])
         self.wait(1)
         
         # Clear all except title, show triangles
