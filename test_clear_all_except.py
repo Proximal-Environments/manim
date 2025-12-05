@@ -31,13 +31,15 @@ def test_scene_clear_all_except():
     # Verify all 3 objects are in the scene (plus the frame)
     print(f"Number of mobjects before clear_all_except: {len(scene.mobjects)}")
     assert len(scene.mobjects) == 4, f"Expected 4 mobjects (3 + frame), got {len(scene.mobjects)}"
+    assert scene.frame in scene.mobjects, "Frame should be in scene initially"
     
-    # Clear all except circle and square
+    # Clear all except circle and square (frame should be preserved automatically)
     scene.clear_all_except(circle, square)
     
-    # Verify only 2 objects remain (plus the frame)
+    # Verify only 2 objects remain (plus the frame which is auto-preserved)
     print(f"Number of mobjects after clear_all_except: {len(scene.mobjects)}")
     assert len(scene.mobjects) == 3, f"Expected 3 mobjects (2 + frame), got {len(scene.mobjects)}"
+    assert scene.frame in scene.mobjects, "Frame should still be in scene (auto-preserved)"
     assert circle in scene.mobjects, "Circle should still be in scene"
     assert square in scene.mobjects, "Square should still be in scene"
     assert triangle not in scene.mobjects, "Triangle should not be in scene"
