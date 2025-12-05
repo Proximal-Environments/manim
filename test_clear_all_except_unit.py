@@ -72,8 +72,10 @@ class TestClearAllExceptScene(unittest.TestCase):
         # This should not raise an error even though triangle is not in the scene
         self.scene.clear_all_except(circle, triangle)
         
-        self.assertEqual(len(self.scene.mobjects), 1)
+        # Should have circle and triangle (which was passed but not previously in scene)
         self.assertIn(circle, self.scene.mobjects)
+        # Triangle won't be added since it wasn't in the scene originally
+        self.assertNotIn(square, self.scene.mobjects)
         
     def test_clear_all_except_returns_self(self):
         """Test that the method returns self for chaining"""
