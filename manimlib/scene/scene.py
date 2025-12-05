@@ -401,11 +401,13 @@ class Scene(object):
         Clears all objects from the scene and adds back the ones given 
         in the argument list of objects to keep.
         
+        Only mobjects that were already in the scene will be kept.
+        
         Args:
             *mobjects_to_keep: Mobjects that should remain in the scene
         """
-        # Store the mobjects we want to keep
-        to_keep = list(mobjects_to_keep)
+        # Filter to only keep mobjects that are currently in the scene
+        to_keep = [mob for mob in mobjects_to_keep if mob in self.mobjects]
         # Clear all mobjects
         self.mobjects = []
         # Add back the mobjects we want to keep
