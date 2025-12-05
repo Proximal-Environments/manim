@@ -245,6 +245,22 @@ class InteractiveScene(Scene):
         super().remove(*mobjects)
         self.regenerate_selection_search_set()
 
+    def clear_all_except(self, *mobjects_to_keep: Mobject):
+        """
+        Clears all objects from the scene and adds back only the ones
+        specified in the argument list. Also regenerates the selection
+        search set for interactive features.
+        
+        Args:
+            *mobjects_to_keep: Mobjects that should remain in the scene
+        
+        Returns:
+            self: Returns the scene object for method chaining
+        """
+        super().clear_all_except(*mobjects_to_keep)
+        self.regenerate_selection_search_set()
+        return self
+
     # Related to selection
 
     def toggle_selection_mode(self):
